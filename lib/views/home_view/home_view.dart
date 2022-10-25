@@ -14,18 +14,21 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     final resultController = Provider.of<ResultStore>(context, listen: false);
-    resultController.getResult();
+
+    resultController.getResult(isRefresh: false);
+
     _scrollController.addListener(() {
       if (_scrollController.position.maxScrollExtent ==
           _scrollController.offset) {
-        resultController.upDateResultsList();
+        resultController.getResult(isRefresh: true);
       }
     });
+
     super.initState();
   }
 
@@ -39,9 +42,9 @@ class _HomeViewState extends State<HomeView> {
         child: Center(
           child: Observer(
               builder: (context) =>
-                  resultController.loadingStatus == LoadingStatus.loaded 
+                  resultController.loadingStatus == LoadingStatus.loaded
                       ? ListView.builder(
-                        controller: _scrollController,
+                          controller: _scrollController,
                           itemCount: resultController.resultsList.length + 1,
                           itemBuilder: (context, index) {
                             if (index < resultController.resultsList.length) {
@@ -51,8 +54,10 @@ class _HomeViewState extends State<HomeView> {
                                 title: Text(
                                   item.name!.first!,
                                 ),
-                                leading: Image.network(
-                                  item.picture!.thumbnail!,
+                                leading: ClipOval(
+                                  child: Image.network(
+                                    item.picture!.thumbnail!,
+                                  ),
                                 ),
                               );
                             } else {

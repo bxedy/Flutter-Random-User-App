@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_random_user/controllers/result_store.dart/result_store.dart';
-import 'package:flutter_random_user/views/home_view.dart';
+import 'package:flutter_random_user/views/home_view/home_view.dart';
 import 'package:provider/provider.dart';
 
 void main() {

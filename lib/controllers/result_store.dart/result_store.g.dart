@@ -45,8 +45,9 @@ mixin _$ResultStore on _ResultStore, Store {
       AsyncAction('_ResultStore.getResult', context: context);
 
   @override
-  Future<void> getResult() {
-    return _$getResultAsyncAction.run(() => super.getResult());
+  Future<void> getResult({required bool isRefresh}) {
+    return _$getResultAsyncAction
+        .run(() => super.getResult(isRefresh: isRefresh));
   }
 
   @override
