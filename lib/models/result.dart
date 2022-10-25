@@ -1,4 +1,3 @@
-import 'package:flutter_random_user/models/data.dart';
 import 'package:flutter_random_user/models/dob.dart';
 import 'package:flutter_random_user/models/id.dart';
 import 'package:flutter_random_user/models/location.dart';
@@ -6,7 +5,7 @@ import 'package:flutter_random_user/models/login.dart';
 import 'package:flutter_random_user/models/name.dart';
 import 'package:flutter_random_user/models/picture.dart';
 
-class Results {
+class Result {
   String? gender;
   Name? name;
   Location? location;
@@ -20,7 +19,7 @@ class Results {
   Picture? picture;
   String? nat;
 
-  Results(
+  Result(
       {this.gender,
       this.name,
       this.location,
@@ -34,7 +33,7 @@ class Results {
       this.picture,
       this.nat});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  Result.fromJson(Map<String, dynamic> json) {
     gender = json['gender'];
     name = json['name'] != null ? Name.fromJson(json['name']) : null;
     location =

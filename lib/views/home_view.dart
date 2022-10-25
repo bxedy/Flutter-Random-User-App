@@ -6,28 +6,66 @@ import 'package:flutter_random_user/controllers/result_store.dart/result_store.d
 import 'package:flutter_random_user/utils/loading_status.dart';
 import 'package:provider/provider.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    final resultController = Provider.of<ResultStore>(context, listen: false);
+    resultController.getResult();
+    _scrollController.addListener(() {
+      if (_scrollController.position.maxScrollExtent ==
+          _scrollController.offset) {
+        resultController.upDateResultsList();
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final resultController = Provider.of<ResultStore>(context, listen: false);
 
     return Scaffold(
-        appBar: AppBar(),
-        body: SafeArea(
-          child: Center(
-            child: Observer(
-                builder: (context) =>
-                    resultController.loadingStatus != LoadingStatus.loading
-                        ? ElevatedButton(
-                            onPressed: () {
-                              resultController.getResult();
-                            },
-                            child: Text('call api'),
-                          )
-                        : CircularProgressIndicator()),
-          ),
-        ));
+      appBar: AppBar(),
+      body: SafeArea(
+        child: Center(
+          child: Observer(
+              builder: (context) =>
+                  resultController.loadingStatus == LoadingStatus.loaded 
+                      ? ListView.builder(
+                        controller: _scrollController,
+                          itemCount: resultController.resultsList.length + 1,
+                          itemBuilder: (context, index) {
+                            if (index < resultController.resultsList.length) {
+                              final item = resultController.resultsList[index];
+
+                              return ListTile(
+                                title: Text(
+                                  item.name!.first!,
+                                ),
+                                leading: Image.network(
+                                  item.picture!.thumbnail!,
+                                ),
+                              );
+                            } else {
+                              return const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 30.0),
+                                child: LinearProgressIndicator(),
+                              );
+                            }
+                          },
+                        )
+                      : const CircularProgressIndicator()),
+        ),
+      ),
+    );
   }
 }
