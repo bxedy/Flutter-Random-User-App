@@ -83,7 +83,7 @@ class _HomeViewState extends State<HomeView> {
                               }
                             },
                           )
-                        : const CircularProgressIndicator()),
+                        : const LinearProgressIndicator()),
           ],
         ),
       ),

@@ -28,24 +28,6 @@ class CustomTextField extends StatelessWidget {
               },
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(top: 14),
-                suffixIcon: ElevatedButton(
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.filter_list,
-                    size: 24,
-                    color: Colors.blueGrey.shade800,
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    padding: EdgeInsets.zero,
-                    elevation: 3,
-                    shape: CircleBorder(),
-                    minimumSize: Size(34, 34),
-                    maximumSize: Size(34, 34),
-                  ),
-                ),
-                suffixIconConstraints: BoxConstraints(
-                    maxHeight: 60, minHeight: 34, maxWidth: 60, minWidth: 34),
                 border: InputBorder.none,
                 hintText: 'Search',
                 prefixIcon: IconButton(
