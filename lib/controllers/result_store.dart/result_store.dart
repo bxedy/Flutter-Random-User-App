@@ -12,15 +12,31 @@ part 'result_store.g.dart';
 class ResultStore = _ResultStore with _$ResultStore;
 
 abstract class _ResultStore with Store {
-
   Data apiResult = Data();
-  
+
   Dio dio = dioConnection;
 
   int pageNumber = 0;
 
   @observable
   List<Result> resultsList = [];
+
+  @observable
+  List<Result> filteredResultsList = [];
+
+  @action
+  filterByName(String val) {
+    filteredResultsList = resultsList
+        .where((element) => element.name!.first!.toLowerCase().contains(val))
+        .toList();
+  }
+
+  @action
+  filterByGender(String val) {
+    filteredResultsList = resultsList
+        .where((element) => element.gender!.toLowerCase().startsWith(val))
+        .toList();
+  }
 
   @observable
   LoadingStatus loadingStatus = LoadingStatus.initial;
@@ -38,7 +54,7 @@ abstract class _ResultStore with Store {
 
         if (response.statusCode == 200) {
           apiResult = Data.fromJson(response.data);
-          resultsList = apiResult.results!;
+          filteredResultsList = resultsList = apiResult.results!;
           loadingStatus = LoadingStatus.loaded;
         }
       } on DioError catch (e) {
@@ -55,7 +71,8 @@ abstract class _ResultStore with Store {
 
         if (response.statusCode == 200) {
           final List<Result> newResults = Data.fromJson(response.data).results!;
-          resultsList = List.from(resultsList)..addAll(newResults);
+          filteredResultsList =
+              resultsList = List.from(resultsList)..addAll(newResults);
         }
       } on DioError catch (e) {
         log(e.response!.statusCode.toString());

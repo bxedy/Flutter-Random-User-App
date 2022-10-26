@@ -25,6 +25,22 @@ mixin _$ResultStore on _ResultStore, Store {
     });
   }
 
+  late final _$filteredResultsListAtom =
+      Atom(name: '_ResultStore.filteredResultsList', context: context);
+
+  @override
+  List<Result> get filteredResultsList {
+    _$filteredResultsListAtom.reportRead();
+    return super.filteredResultsList;
+  }
+
+  @override
+  set filteredResultsList(List<Result> value) {
+    _$filteredResultsListAtom.reportWrite(value, super.filteredResultsList, () {
+      super.filteredResultsList = value;
+    });
+  }
+
   late final _$loadingStatusAtom =
       Atom(name: '_ResultStore.loadingStatus', context: context);
 
@@ -50,10 +66,36 @@ mixin _$ResultStore on _ResultStore, Store {
         .run(() => super.getResult(isRefresh: isRefresh));
   }
 
+  late final _$_ResultStoreActionController =
+      ActionController(name: '_ResultStore', context: context);
+
+  @override
+  dynamic filterByName(String val) {
+    final _$actionInfo = _$_ResultStoreActionController.startAction(
+        name: '_ResultStore.filterByName');
+    try {
+      return super.filterByName(val);
+    } finally {
+      _$_ResultStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic filterByGender(String val) {
+    final _$actionInfo = _$_ResultStoreActionController.startAction(
+        name: '_ResultStore.filterByGender');
+    try {
+      return super.filterByGender(val);
+    } finally {
+      _$_ResultStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 resultsList: ${resultsList},
+filteredResultsList: ${filteredResultsList},
 loadingStatus: ${loadingStatus}
     ''';
   }
