@@ -57,6 +57,22 @@ mixin _$ResultStore on _ResultStore, Store {
     });
   }
 
+  late final _$selectedGenderAtom =
+      Atom(name: '_ResultStore.selectedGender', context: context);
+
+  @override
+  Gender get selectedGender {
+    _$selectedGenderAtom.reportRead();
+    return super.selectedGender;
+  }
+
+  @override
+  set selectedGender(Gender value) {
+    _$selectedGenderAtom.reportWrite(value, super.selectedGender, () {
+      super.selectedGender = value;
+    });
+  }
+
   late final _$getResultAsyncAction =
       AsyncAction('_ResultStore.getResult', context: context);
 
@@ -70,6 +86,17 @@ mixin _$ResultStore on _ResultStore, Store {
       ActionController(name: '_ResultStore', context: context);
 
   @override
+  dynamic switchGender(Gender gender) {
+    final _$actionInfo = _$_ResultStoreActionController.startAction(
+        name: '_ResultStore.switchGender');
+    try {
+      return super.switchGender(gender);
+    } finally {
+      _$_ResultStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic filterByName(String val) {
     final _$actionInfo = _$_ResultStoreActionController.startAction(
         name: '_ResultStore.filterByName');
@@ -81,11 +108,11 @@ mixin _$ResultStore on _ResultStore, Store {
   }
 
   @override
-  dynamic filterByGender(String val) {
+  dynamic filterByGender() {
     final _$actionInfo = _$_ResultStoreActionController.startAction(
         name: '_ResultStore.filterByGender');
     try {
-      return super.filterByGender(val);
+      return super.filterByGender();
     } finally {
       _$_ResultStoreActionController.endAction(_$actionInfo);
     }
@@ -96,7 +123,8 @@ mixin _$ResultStore on _ResultStore, Store {
     return '''
 resultsList: ${resultsList},
 filteredResultsList: ${filteredResultsList},
-loadingStatus: ${loadingStatus}
+loadingStatus: ${loadingStatus},
+selectedGender: ${selectedGender}
     ''';
   }
 }

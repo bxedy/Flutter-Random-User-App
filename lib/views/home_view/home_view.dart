@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_random_user/controllers/result_store.dart/result_store.dart';
-import 'package:flutter_random_user/utils/loading_status.dart';
+import 'package:flutter_random_user/utils/loading_status_enum.dart';
 import 'package:flutter_random_user/views/home_view/components/custom_text_field.dart';
 import 'package:flutter_random_user/views/home_view/components/gender_selection.dart';
 import 'package:flutter_random_user/views/result_details_view/result_details_view.dart';
@@ -43,7 +43,7 @@ class _HomeViewState extends State<HomeView> {
           controller: _scrollController,
           children: [
             const CustomTextField(title: 'Random Users',),
-            GenderSelection(),
+            const GenderSelection(),
             Observer(
                 builder: (context) =>
                     resultController.loadingStatus == LoadingStatus.loaded
