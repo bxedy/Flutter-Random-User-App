@@ -33,13 +33,16 @@ abstract class _ResultStore with Store {
 
   @action
   switchGender(Gender gender) {
-    selectedGender = gender;
-    
-    filterByGender();
-
-    if (filteredResultsList.length < 15) {
+    if (selectedGender == gender) {
+      undoGenderFilter();
+      return;
+    } else if (filteredResultsList.length < 15) {
       getResult(isRefresh: true);
     }
+
+    selectedGender = gender;
+
+    filterByGender();
   }
 
   @action
@@ -49,11 +52,17 @@ abstract class _ResultStore with Store {
         .toList();
   }
 
+  undoGenderFilter() {
+    selectedGender = Gender.none;
+    filteredResultsList = resultsList;
+  }
+
   @action
   filterByGender() {
     filteredResultsList = resultsList
-        .where((element) =>
-            element.gender!.toLowerCase().startsWith(getSelectedGenderString ?? ''))
+        .where((element) => element.gender!
+            .toLowerCase()
+            .startsWith(getSelectedGenderString ?? ''))
         .toList();
   }
 
@@ -85,7 +94,6 @@ abstract class _ResultStore with Store {
       pageNumber++;
 
       try {
-        log(getSelectedGenderString!);
         final response = await dioConnection.get(
             '$baseUrl?format=json&page=$pageNumber&results=20${getSelectedGenderString != null ? '&gender=$getSelectedGenderString' : ''}');
         log('$baseUrl?format=json&page=$pageNumber&results=20${getSelectedGenderString != null ? '&gender=$getSelectedGenderString' : ''}');
