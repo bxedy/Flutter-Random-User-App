@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_random_user/controllers/result_store.dart/result_store.dart';
+import 'package:flutter_random_user/controllers/result_store.dart/random_users_store.dart';
 import 'package:flutter_random_user/views/home_view/home_view.dart';
 import 'package:provider/provider.dart';
 
@@ -14,15 +14,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<ResultStore>(
-          create: (_) => ResultStore(),
+        Provider<RandomUsersStore>(
+          create: (_) => RandomUsersStore(),
         ),
       ],
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
         ),
-        home: const HomeView(),
+        home: const RandomUsersListView(),
       ),
     );
   }

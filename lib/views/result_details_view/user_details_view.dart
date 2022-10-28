@@ -1,15 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_random_user/models/result.dart';
 import 'package:flutter_random_user/views/result_details_view/components/info_card.dart';
 
-class ResultDetailsView extends StatelessWidget {
+class UserDetailsView extends StatefulWidget {
   final Result resultItem;
 
-  const ResultDetailsView({
+  const UserDetailsView({
     Key? key,
     required this.resultItem,
   }) : super(key: key);
 
+  @override
+  State<UserDetailsView> createState() => _UserDetailsViewState();
+}
+
+class _UserDetailsViewState extends State<UserDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,12 +29,14 @@ class ResultDetailsView extends StatelessWidget {
                 Column(
                   children: [
                     ClipOval(
-                      child: SizedBox(
-                        height: 250,
-                        child: Image.network(
-                          resultItem.picture!.large!,
-                          fit: BoxFit.fitHeight,
-                          scale: 0.5,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fitHeight,
+                        height: 150,
+                        width: 150,
+                        imageUrl: widget.resultItem.picture!.thumbnail!,
+                        errorWidget: (context, url, error) => Icon(
+                          Icons.error,
+                          color: Colors.blueGrey.shade800,
                         ),
                       ),
                     ),
@@ -38,7 +46,7 @@ class ResultDetailsView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '${resultItem.name!.first!} ${resultItem.name!.last!}',
+                            '${widget.resultItem.name!.first!} ${widget.resultItem.name!.last!}',
                             style: TextStyle(
                               fontSize: 30,
                               color: Colors.blueGrey.shade800,
@@ -48,7 +56,7 @@ class ResultDetailsView extends StatelessWidget {
                             width: 10,
                           ),
                           Icon(
-                            resultItem.gender == 'male'
+                            widget.resultItem.gender == 'male'
                                 ? Icons.male
                                 : Icons.female,
                             color: Colors.blueGrey.shade800,
@@ -88,64 +96,64 @@ class ResultDetailsView extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Primeiro nome:'),
-            Text(resultItem.name!.first!),
+            const Text('Primeiro nome:'),
+            Text(widget.resultItem.name!.first!),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Sobrenome:'),
-            Text(resultItem.name!.last!),
+            const Text('Sobrenome:'),
+            Text(widget.resultItem.name!.last!),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Idade:'),
-            Text(resultItem.dob!.age!.toString()),
+            const Text('Idade:'),
+            Text(widget.resultItem.dob!.age!.toString()),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Telefone:'),
-            Text(resultItem.phone.toString()),
+            const Text('Telefone:'),
+            Text(widget.resultItem.phone.toString()),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Celular:'),
-            Text(resultItem.cell.toString()),
+            const Text('Celular:'),
+            Text(widget.resultItem.cell.toString()),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Gênero:'),
-            Text(resultItem.gender.toString()),
+            const Text('Gênero:'),
+            Text(widget.resultItem.gender.toString()),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Email:'),
-            Text(resultItem.email.toString()),
+            const Text('Email:'),
+            Text(widget.resultItem.email.toString()),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Nome de usuário:'),
-            Text(resultItem.login!.username!),
+            const Text('Nome de usuário:'),
+            Text(widget.resultItem.login!.username!),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Senha:'),
-            Text(resultItem.login!.password!),
+            const Text('Senha:'),
+            Text(widget.resultItem.login!.password!),
           ],
         ),
       ],
@@ -159,43 +167,43 @@ class ResultDetailsView extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Rua:'),
-            Text(resultItem.location!.street!.name!),
+            const Text('Rua:'),
+            Text(widget.resultItem.location!.street!.name!),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Número:'),
-            Text(resultItem.location!.street!.number!.toString()),
+            const Text('Número:'),
+            Text(widget.resultItem.location!.street!.number!.toString()),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Cudade:'),
-            Text(resultItem.location!.city!),
+            const Text('Cudade:'),
+            Text(widget.resultItem.location!.city!),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Estado:'),
-            Text(resultItem.location!.state!),
+            const Text('Estado:'),
+            Text(widget.resultItem.location!.state!),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('País:'),
-            Text(resultItem.location!.country!),
+            const Text('País:'),
+            Text(widget.resultItem.location!.country!),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Fuso horário:'),
-            Text(resultItem.location!.timezone!.offset.toString()),
+            const Text('Fuso horário:'),
+            Text(widget.resultItem.location!.timezone!.offset.toString()),
           ],
         ),
       ],

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'result_store.dart';
+part of 'random_users_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,9 @@ part of 'result_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$ResultStore on _ResultStore, Store {
+mixin _$RandomUsersStore on _RandomUsersStore, Store {
   late final _$resultsListAtom =
-      Atom(name: '_ResultStore.resultsList', context: context);
+      Atom(name: '_RandomUsersStore.resultsList', context: context);
 
   @override
   List<Result> get resultsList {
@@ -26,7 +26,7 @@ mixin _$ResultStore on _ResultStore, Store {
   }
 
   late final _$filteredResultsListAtom =
-      Atom(name: '_ResultStore.filteredResultsList', context: context);
+      Atom(name: '_RandomUsersStore.filteredResultsList', context: context);
 
   @override
   List<Result> get filteredResultsList {
@@ -42,7 +42,7 @@ mixin _$ResultStore on _ResultStore, Store {
   }
 
   late final _$loadingStatusAtom =
-      Atom(name: '_ResultStore.loadingStatus', context: context);
+      Atom(name: '_RandomUsersStore.loadingStatus', context: context);
 
   @override
   LoadingStatus get loadingStatus {
@@ -58,7 +58,7 @@ mixin _$ResultStore on _ResultStore, Store {
   }
 
   late final _$selectedGenderAtom =
-      Atom(name: '_ResultStore.selectedGender', context: context);
+      Atom(name: '_RandomUsersStore.selectedGender', context: context);
 
   @override
   Gender get selectedGender {
@@ -73,48 +73,56 @@ mixin _$ResultStore on _ResultStore, Store {
     });
   }
 
-  late final _$getResultAsyncAction =
-      AsyncAction('_ResultStore.getResult', context: context);
+  late final _$getDataFromInternetAsyncAction =
+      AsyncAction('_RandomUsersStore.getDataFromInternet', context: context);
 
   @override
-  Future<void> getResult({required bool isRefresh}) {
-    return _$getResultAsyncAction
-        .run(() => super.getResult(isRefresh: isRefresh));
+  Future<void> getDataFromInternet({required bool isRefresh}) {
+    return _$getDataFromInternetAsyncAction
+        .run(() => super.getDataFromInternet(isRefresh: isRefresh));
   }
 
-  late final _$_ResultStoreActionController =
-      ActionController(name: '_ResultStore', context: context);
+  late final _$getDataFromCacheAsyncAction =
+      AsyncAction('_RandomUsersStore.getDataFromCache', context: context);
+
+  @override
+  Future getDataFromCache() {
+    return _$getDataFromCacheAsyncAction.run(() => super.getDataFromCache());
+  }
+
+  late final _$_RandomUsersStoreActionController =
+      ActionController(name: '_RandomUsersStore', context: context);
 
   @override
   dynamic switchGender(Gender gender) {
-    final _$actionInfo = _$_ResultStoreActionController.startAction(
-        name: '_ResultStore.switchGender');
+    final _$actionInfo = _$_RandomUsersStoreActionController.startAction(
+        name: '_RandomUsersStore.switchGender');
     try {
       return super.switchGender(gender);
     } finally {
-      _$_ResultStoreActionController.endAction(_$actionInfo);
+      _$_RandomUsersStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic filterByName(String val) {
-    final _$actionInfo = _$_ResultStoreActionController.startAction(
-        name: '_ResultStore.filterByName');
+    final _$actionInfo = _$_RandomUsersStoreActionController.startAction(
+        name: '_RandomUsersStore.filterByName');
     try {
       return super.filterByName(val);
     } finally {
-      _$_ResultStoreActionController.endAction(_$actionInfo);
+      _$_RandomUsersStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic filterByGender() {
-    final _$actionInfo = _$_ResultStoreActionController.startAction(
-        name: '_ResultStore.filterByGender');
+    final _$actionInfo = _$_RandomUsersStoreActionController.startAction(
+        name: '_RandomUsersStore.filterByGender');
     try {
       return super.filterByGender();
     } finally {
-      _$_ResultStoreActionController.endAction(_$actionInfo);
+      _$_RandomUsersStoreActionController.endAction(_$actionInfo);
     }
   }
 

@@ -1,9 +1,9 @@
-import 'package:flutter_random_user/models/dob.dart';
 import 'package:flutter_random_user/models/id.dart';
-import 'package:flutter_random_user/models/location.dart';
-import 'package:flutter_random_user/models/login.dart';
+import 'package:flutter_random_user/models/dob.dart';
 import 'package:flutter_random_user/models/name.dart';
+import 'package:flutter_random_user/models/login.dart';
 import 'package:flutter_random_user/models/picture.dart';
+import 'package:flutter_random_user/models/location.dart';
 
 class Result {
   String? gender;

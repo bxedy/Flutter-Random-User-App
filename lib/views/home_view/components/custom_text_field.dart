@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_random_user/controllers/result_store.dart/result_store.dart';
+import 'package:flutter_random_user/controllers/result_store.dart/random_users_store.dart';
 import 'package:provider/provider.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -19,7 +19,7 @@ TextEditingController searchController = TextEditingController();
 class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
-    final resultController = Provider.of<ResultStore>(context, listen: false);
+    final randomUsersStore = Provider.of<RandomUsersStore>(context, listen: false);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -35,10 +35,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
             TextField(
               controller: searchController,
               onChanged: (val) {
-                resultController.filterByName(val);
+                randomUsersStore.filterByName(val);
               },
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(top: 14),
+                contentPadding: const EdgeInsets.only(top: 14),
                 border: InputBorder.none,
                 hintText: 'Search',
                 prefixIcon: IconButton(

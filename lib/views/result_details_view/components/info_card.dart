@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 
 class CustomInfoContainer extends StatelessWidget {
   final String title;
@@ -15,7 +14,7 @@ class CustomInfoContainer extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Material(
         elevation: 3,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         child: Container(
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -33,7 +32,7 @@ class CustomInfoContainer extends StatelessWidget {
                     child: Text(
                       title,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                          const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   ),
                   ...children

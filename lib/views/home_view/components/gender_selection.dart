@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_random_user/controllers/result_store.dart/result_store.dart';
+import 'package:flutter_random_user/controllers/result_store.dart/random_users_store.dart';
 import 'package:flutter_random_user/utils/gender_enum.dart';
 import 'package:provider/provider.dart';
 
@@ -18,18 +16,18 @@ int selectedIndex = 0;
 class _GenderSelectionState extends State<GenderSelection> {
   @override
   Widget build(BuildContext context) {
-    final resultController = Provider.of<ResultStore>(context, listen: false);
+    final randomUsersStore = Provider.of<RandomUsersStore>(context, listen: false);
 
     return Row(children: [
       GenderButton(
         onPressed: () {
-          resultController.switchGender(Gender.male);
+          randomUsersStore.switchGender(Gender.male);
         },
         gender: Gender.male,
       ),
       GenderButton(
         onPressed: () {
-          resultController.switchGender(Gender.female);
+          randomUsersStore.switchGender(Gender.female);
         },
         gender: Gender.female,
       )
@@ -48,13 +46,13 @@ class GenderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final resultController = Provider.of<ResultStore>(context, listen: false);
+    final randomUsersStore = Provider.of<RandomUsersStore>(context, listen: false);
 
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Observer(
           builder: (context) {
-            final isSelected = gender == resultController.selectedGender;
+            final isSelected = gender == randomUsersStore.selectedGender;
 
             return ElevatedButton(
               onPressed: onPressed,

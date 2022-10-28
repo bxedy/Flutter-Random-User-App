@@ -33,7 +33,10 @@ dependencies:
   flutter_mobx: ^2.0.2
   mobx: ^2.0.5
   dio: ^4.0.6
-  pretty_dio_logger: ^1.1.1
+  sqflite: ^2.0.3
+  cached_network_image: ^3.2.1
+  internet_connection_checker: 
+
 
 
   # The following adds the Cupertino Icons font to your application.
