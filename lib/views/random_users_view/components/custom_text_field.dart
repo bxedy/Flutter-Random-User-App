@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_random_user/controllers/result_store.dart/random_users_store.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_random_user/controllers/random_users_store.dart/random_users_store.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_random_user/controllers/result_store.dart/random_users_store.dart';
-import 'package:flutter_random_user/utils/gender_enum.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_random_user/utils/gender_enum.dart';
+import 'package:flutter_random_user/controllers/random_users_store.dart/random_users_store.dart';
 
 class GenderSelection extends StatefulWidget {
   const GenderSelection({Key? key}) : super(key: key);

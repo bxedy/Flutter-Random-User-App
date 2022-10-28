@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_random_user/controllers/result_store.dart/random_users_store.dart';
-import 'package:flutter_random_user/views/home_view/home_view.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_random_user/views/random_users_view/random_users_list_view.dart';
+import 'package:flutter_random_user/controllers/random_users_store.dart/random_users_store.dart';
 
 void main() {
   runApp(const MyApp());

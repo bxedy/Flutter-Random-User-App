@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_random_user/models/result.dart';
-import 'package:flutter_random_user/views/result_details_view/components/info_card.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_random_user/views/user_details_view/components/info_card.dart';
 
 class UserDetailsView extends StatefulWidget {
   final Result resultItem;

@@ -1,12 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_random_user/controllers/result_store.dart/random_users_store.dart';
-import 'package:flutter_random_user/utils/loading_status_enum.dart';
-import 'package:flutter_random_user/views/home_view/components/custom_text_field.dart';
-import 'package:flutter_random_user/views/home_view/components/gender_selection.dart';
-import 'package:flutter_random_user/views/result_details_view/user_details_view.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_random_user/utils/loading_status_enum.dart';
+import 'package:flutter_random_user/views/user_details_view/user_details_view.dart';
+import 'package:flutter_random_user/views/random_users_view/components/gender_selection.dart';
+import 'package:flutter_random_user/views/random_users_view/components/custom_text_field.dart';
+
+import 'package:flutter_random_user/controllers/random_users_store.dart/random_users_store.dart';
 
 class RandomUsersListView extends StatefulWidget {
   const RandomUsersListView({Key? key}) : super(key: key);
