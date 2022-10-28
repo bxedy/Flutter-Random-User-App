@@ -155,17 +155,14 @@ abstract class _RandomUsersStore with Store {
   @action
   getDataFromCache() async {
     loadingStatus = LoadingStatus.loading;
-
     Database database = await openDatabase('data_database.db', version: 1);
-    List cacheDataList = await database.rawQuery("SELECT * FROM data_table;");
-    List<Result> finalData = [];
-    for (var data in cacheDataList) {
-      finalData.add(Result.fromJson(jsonDecode(data['value'])));
+    List cachedUsersDataList = await database.rawQuery("SELECT * FROM data_table;");
+    for (var data in cachedUsersDataList) {
+      resultsList.add(Result.fromJson(jsonDecode(data['value'])));
     }
-    resultsList = filteredResultsList = finalData;
+    filteredResultsList = resultsList;
     loadingStatus = LoadingStatus.loaded;
     await database.close();
-    return finalData;
   }
 
   String? get getSelectedGenderString => selectedGender == Gender.male
