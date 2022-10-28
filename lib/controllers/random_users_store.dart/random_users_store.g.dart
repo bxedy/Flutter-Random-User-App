@@ -86,7 +86,7 @@ mixin _$RandomUsersStore on _RandomUsersStore, Store {
       AsyncAction('_RandomUsersStore.getDataFromCache', context: context);
 
   @override
-  Future getDataFromCache() {
+  Future<void> getDataFromCache() {
     return _$getDataFromCacheAsyncAction.run(() => super.getDataFromCache());
   }
 
@@ -94,18 +94,7 @@ mixin _$RandomUsersStore on _RandomUsersStore, Store {
       ActionController(name: '_RandomUsersStore', context: context);
 
   @override
-  dynamic switchGender(BuildContext context, Gender gender) {
-    final _$actionInfo = _$_RandomUsersStoreActionController.startAction(
-        name: '_RandomUsersStore.switchGender');
-    try {
-      return super.switchGender(context, gender);
-    } finally {
-      _$_RandomUsersStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic filterByName(String val) {
+  void filterByName(String val) {
     final _$actionInfo = _$_RandomUsersStoreActionController.startAction(
         name: '_RandomUsersStore.filterByName');
     try {
@@ -116,11 +105,22 @@ mixin _$RandomUsersStore on _RandomUsersStore, Store {
   }
 
   @override
-  dynamic filterByGender() {
+  void filterByGender() {
     final _$actionInfo = _$_RandomUsersStoreActionController.startAction(
         name: '_RandomUsersStore.filterByGender');
     try {
       return super.filterByGender();
+    } finally {
+      _$_RandomUsersStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void switchGender(BuildContext context, Gender gender) {
+    final _$actionInfo = _$_RandomUsersStoreActionController.startAction(
+        name: '_RandomUsersStore.switchGender');
+    try {
+      return super.switchGender(context, gender);
     } finally {
       _$_RandomUsersStoreActionController.endAction(_$actionInfo);
     }

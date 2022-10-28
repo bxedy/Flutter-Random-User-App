@@ -31,12 +31,32 @@ abstract class _RandomUsersStore with Store {
   @observable
   LoadingStatus loadingStatus = LoadingStatus.initial;
 
-
   @observable
   Gender selectedGender = Gender.none;
 
+  void undoGenderFilter() {
+    selectedGender = Gender.none;
+    filteredResultsList = resultsList;
+  }
+
   @action
-  switchGender(BuildContext context, Gender gender) {
+  void filterByName(String val) {
+    filteredResultsList = resultsList
+        .where((element) => element.name!.first!.toLowerCase().contains(val))
+        .toList();
+  }
+
+  @action
+  void filterByGender() {
+    filteredResultsList = resultsList
+        .where((element) => element.gender!
+            .toLowerCase()
+            .startsWith(getSelectedGenderString ?? ''))
+        .toList();
+  }
+
+  @action
+  void switchGender(BuildContext context, Gender gender) {
     if (selectedGender == gender) {
       undoGenderFilter();
       return;
@@ -51,12 +71,7 @@ abstract class _RandomUsersStore with Store {
     }
   }
 
-  undoGenderFilter() {
-    selectedGender = Gender.none;
-    filteredResultsList = resultsList;
-  }
-
-  getData(context, {required bool isRefresh}) async {
+  Future<void> getData(context, {required bool isRefresh}) async {
     final bool hasInternet = await checkConnection();
     if (hasInternet) {
       getDataFromInternet(isRefresh: isRefresh);
@@ -65,22 +80,6 @@ abstract class _RandomUsersStore with Store {
       showCustomSnackBar(
           context, 'Não há conexão com a internet', Icons.warning_rounded);
     }
-  }
-
-  @action
-  filterByName(String val) {
-    filteredResultsList = resultsList
-        .where((element) => element.name!.first!.toLowerCase().contains(val))
-        .toList();
-  }
-
-  @action
-  filterByGender() {
-    filteredResultsList = resultsList
-        .where((element) => element.gender!
-            .toLowerCase()
-            .startsWith(getSelectedGenderString ?? ''))
-        .toList();
   }
 
   @action
@@ -133,7 +132,21 @@ abstract class _RandomUsersStore with Store {
     }
   }
 
-  void setCacheData() async {
+  @action
+  Future<void> getDataFromCache() async {
+    loadingStatus = LoadingStatus.loading;
+    Database database = await openDatabase('data_database.db', version: 1);
+    List cachedUsersDataList =
+        await database.rawQuery("SELECT * FROM data_table;");
+    for (var data in cachedUsersDataList) {
+      resultsList.add(Result.fromJson(jsonDecode(data['value'])));
+    }
+    filteredResultsList = resultsList;
+    loadingStatus = LoadingStatus.loaded;
+    await database.close();
+  }
+
+  Future<void> setCacheData() async {
     debugPrint("Setando o cache");
     Database database = await openDatabase('data_database.db', version: 1,
         onCreate: (database, version) async {
@@ -149,20 +162,6 @@ abstract class _RandomUsersStore with Store {
       });
     }
     debugPrint("Banco setado");
-    await database.close();
-  }
-
-  @action
-  getDataFromCache() async {
-    loadingStatus = LoadingStatus.loading;
-    Database database = await openDatabase('data_database.db', version: 1);
-    List cachedUsersDataList =
-        await database.rawQuery("SELECT * FROM data_table;");
-    for (var data in cachedUsersDataList) {
-      resultsList.add(Result.fromJson(jsonDecode(data['value'])));
-    }
-    filteredResultsList = resultsList;
-    loadingStatus = LoadingStatus.loaded;
     await database.close();
   }
 
