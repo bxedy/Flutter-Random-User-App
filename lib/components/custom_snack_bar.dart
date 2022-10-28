@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 
-void showCustomSnackBar(BuildContext context, String text) {
+void showCustomSnackBar(BuildContext context, String text, IconData icon) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: Text(
-        text,
-        style: const TextStyle(
-          fontWeight: FontWeight.w500,
-          color: Colors.white,
-          fontSize: 16,
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Row(
+          children: [
+            Icon(icon, color: Colors.white, size: 20,),
+            const SizedBox(width: 10),
+            Text(
+              text,
+              style: const TextStyle(
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+          ],
         ),
       ),
       elevation: 1,

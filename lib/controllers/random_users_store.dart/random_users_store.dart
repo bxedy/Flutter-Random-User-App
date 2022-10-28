@@ -2,15 +2,15 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_random_user/components/custom_snack_bar.dart';
-import 'package:mobx/mobx.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_random_user/components/custom_snack_bar.dart';
 import 'package:flutter_random_user/models/result.dart';
 import 'package:flutter_random_user/services/dio_custom_config_getter.dart';
 import 'package:flutter_random_user/utils/gender_enum.dart';
 import 'package:flutter_random_user/utils/internet_checker.dart';
 import 'package:flutter_random_user/utils/loading_status_enum.dart';
+import 'package:mobx/mobx.dart';
+import 'package:sqflite/sqflite.dart';
 
 part 'random_users_store.g.dart';
 
@@ -63,7 +63,8 @@ abstract class _RandomUsersStore with Store {
       getDataFromInternet(isRefresh: isRefresh);
     } else if (!hasInternet && !isRefresh) {
       getDataFromCache();
-      showCustomSnackBar(context, 'Não há conexão com a internet');
+      showCustomSnackBar(
+          context, 'Não há conexão com a internet', Icons.warning_rounded);
     }
   }
 
@@ -156,7 +157,8 @@ abstract class _RandomUsersStore with Store {
   getDataFromCache() async {
     loadingStatus = LoadingStatus.loading;
     Database database = await openDatabase('data_database.db', version: 1);
-    List cachedUsersDataList = await database.rawQuery("SELECT * FROM data_table;");
+    List cachedUsersDataList =
+        await database.rawQuery("SELECT * FROM data_table;");
     for (var data in cachedUsersDataList) {
       resultsList.add(Result.fromJson(jsonDecode(data['value'])));
     }
