@@ -31,7 +31,6 @@ abstract class _RandomUsersStore with Store {
   @observable
   LoadingStatus loadingStatus = LoadingStatus.initial;
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @observable
   Gender selectedGender = Gender.none;
