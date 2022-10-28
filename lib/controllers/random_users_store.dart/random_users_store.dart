@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_random_user/components/custom_snack_bar.dart';
 import 'package:mobx/mobx.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +31,13 @@ abstract class _RandomUsersStore with Store {
   @observable
   LoadingStatus loadingStatus = LoadingStatus.initial;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @observable
   Gender selectedGender = Gender.none;
 
   @action
-  switchGender(Gender gender) {
+  switchGender(BuildContext context, Gender gender) {
     if (selectedGender == gender) {
       undoGenderFilter();
       return;
@@ -45,7 +48,7 @@ abstract class _RandomUsersStore with Store {
     filterByGender();
 
     if (filteredResultsList.length < 15) {
-      getData(isRefresh: true);
+      getData(context, isRefresh: true);
     }
   }
 
@@ -54,13 +57,13 @@ abstract class _RandomUsersStore with Store {
     filteredResultsList = resultsList;
   }
 
-  getData({required bool isRefresh}) async {
+  getData(context, {required bool isRefresh}) async {
     final bool hasInternet = await checkConnection();
-    log(hasInternet.toString());
     if (hasInternet) {
       getDataFromInternet(isRefresh: isRefresh);
     } else if (!hasInternet && !isRefresh) {
       getDataFromCache();
+      showCustomSnackBar(context, 'Não há conexão com a internet');
     }
   }
 

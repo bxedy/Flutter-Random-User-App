@@ -23,12 +23,12 @@ class _RandomUsersListViewState extends State<RandomUsersListView> {
   void initState() {
     final randomUsersStore = Provider.of<RandomUsersStore>(context, listen: false);
 
-    randomUsersStore.getData(isRefresh: false);
+    randomUsersStore.getData(context, isRefresh: false);
 
     _scrollController.addListener(() {
       if (_scrollController.position.maxScrollExtent ==
           _scrollController.offset) {
-        randomUsersStore.getData(isRefresh: true);
+        randomUsersStore.getData(context, isRefresh: true);
       }
     });
 

@@ -21,13 +21,13 @@ class _GenderSelectionState extends State<GenderSelection> {
     return Row(children: [
       GenderButton(
         onPressed: () {
-          randomUsersStore.switchGender(Gender.male);
+          randomUsersStore.switchGender(context, Gender.male);
         },
         gender: Gender.male,
       ),
       GenderButton(
         onPressed: () {
-          randomUsersStore.switchGender(Gender.female);
+          randomUsersStore.switchGender(context, Gender.female);
         },
         gender: Gender.female,
       )

@@ -94,11 +94,11 @@ mixin _$RandomUsersStore on _RandomUsersStore, Store {
       ActionController(name: '_RandomUsersStore', context: context);
 
   @override
-  dynamic switchGender(Gender gender) {
+  dynamic switchGender(BuildContext context, Gender gender) {
     final _$actionInfo = _$_RandomUsersStoreActionController.startAction(
         name: '_RandomUsersStore.switchGender');
     try {
-      return super.switchGender(gender);
+      return super.switchGender(context, gender);
     } finally {
       _$_RandomUsersStoreActionController.endAction(_$actionInfo);
     }
