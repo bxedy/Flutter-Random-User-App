@@ -118,8 +118,8 @@ abstract class _RandomUsersStore with Store {
               .toList();
 
           if (selectedGender == Gender.none) {
-            filteredResultsList = resultsList =
-                filteredResultsList + resultsList + newPageResponse;
+          filteredResultsList = resultsList = List.from(resultsList)
+              ..addAll(newPageResponse);
           } else {
             filteredResultsList = resultsList = List.from(filteredResultsList)
               ..addAll(newPageResponse);
