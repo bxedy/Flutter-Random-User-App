@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_random_user/models/result.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_random_user/views/user_details_view/components/info_card.dart';
 
 class UserDetailsView extends StatefulWidget {
@@ -139,7 +139,13 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text('Email:'),
-            Text(widget.resultItem.email.toString()),
+            SizedBox(
+                width: 200,
+                child: Text(
+                  widget.resultItem.email.toString(),
+                  softWrap: false,
+                  textAlign: TextAlign.end,
+                )),
           ],
         ),
         Row(
